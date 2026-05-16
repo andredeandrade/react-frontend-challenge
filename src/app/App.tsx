@@ -1,13 +1,7 @@
-import { Button } from '@/shared/ui/button';
+// App.tsx is no longer used as the main component.
+// Router is now configured in src/app/routes/index.ts
+// and mounted directly in src/main.tsx
 
 export default function App() {
-  return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="p-6">
-        <h1 className="text-3xl font-bold">CineDash</h1>
-
-        <Button>Teste</Button>
-      </div>
-    </main>
-  );
+  return null;
 }
