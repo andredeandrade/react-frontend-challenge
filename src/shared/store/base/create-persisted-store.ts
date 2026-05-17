@@ -20,7 +20,7 @@ export function createPersistedStore<T extends object, PersistedState = T>(
   options: PersistedStoreOptions<T, PersistedState>,
 ): UseBoundStore<StoreApi<T>> {
   return create<T>()(
-    persist(initializer, {
+    persist<T, [], [], PersistedState>(initializer, {
       storage: createJSONStorage(() => localStorage),
       ...options,
     }),

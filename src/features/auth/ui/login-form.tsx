@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
+import { useAuthStore } from '@/features/auth/model';
 import { loginSchema, type LoginFormValues } from '@/shared/lib/validation/login-schema';
 import { Button } from '@/shared/ui/button';
 import { Field, FieldLabel } from '@/shared/ui/field';
@@ -9,7 +9,10 @@ import { Input } from '@/shared/ui/input';
 import { PasswordInput } from '@/shared/ui/password-input';
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
+  const login = useAuthStore((state) => state.login);
+  const status = useAuthStore((state) => state.status);
+  const authError = useAuthStore((state) => state.error);
+  const isLoading = status === 'loading';
 
   const {
     register,
@@ -25,13 +28,8 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = async (_values: LoginFormValues) => {
-    setIsLoading(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+  const onSubmit = async (values: LoginFormValues) => {
+    await login(values);
   };
 
   return (
@@ -70,6 +68,10 @@ export function LoginForm() {
       <Button type="submit" className="h-10 w-full" disabled={isLoading}>
         {isLoading ? 'Entrando...' : 'Entrar'}
       </Button>
+
+      {authError ? (
+        <p className="text-center text-sm text-destructive">{authError}</p>
+      ) : null}
     </form>
   );
 }
