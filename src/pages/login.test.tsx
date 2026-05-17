@@ -20,10 +20,9 @@ describe('LoginPage', () => {
 
     await user.type(screen.getByLabelText(/e-mail/i), 'invalid-email');
     await user.type(screen.getByPlaceholderText(/digite sua senha/i), '123');
-    await user.click(screen.getByRole('button', { name: /entrar/i }));
 
     expect(
-      await screen.findByText(/informe um e-mail válido/i),
+      await screen.findByText(/informe um e-mail valido/i),
     ).toBeInTheDocument();
     expect(
       await screen.findByText(/a senha deve ter pelo menos 6 caracteres/i),

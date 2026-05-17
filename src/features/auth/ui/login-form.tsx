@@ -17,6 +17,8 @@ export function LoginForm() {
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     defaultValues: {
       email: '',
       password: '',
