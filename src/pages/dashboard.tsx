@@ -18,7 +18,7 @@ export function DashboardPage() {
   };
 
   return (
-    <Card className="mx-auto w-full max-w-3xl border border-border/70 shadow-sm">
+    <Card className="w-full border border-border/70 shadow-sm">
       <CardHeader>
         <CardTitle className="text-3xl font-semibold tracking-tight">
           Dashboard
