@@ -1,5 +1,6 @@
 import {
   create,
+  type Mutate,
   type StateCreator,
   type StoreApi,
   type UseBoundStore,
@@ -18,9 +19,11 @@ type PersistedStoreOptions<T extends object, PersistedState> = Omit<
 export function createPersistedStore<T extends object, PersistedState = T>(
   initializer: StateCreator<T, [], []>,
   options: PersistedStoreOptions<T, PersistedState>,
-): UseBoundStore<StoreApi<T>> {
+): UseBoundStore<
+  Mutate<StoreApi<T>, [['zustand/persist', PersistedState]]>
+> {
   return create<T>()(
-    persist(initializer, {
+    persist<T, [], [], PersistedState>(initializer, {
       storage: createJSONStorage(() => localStorage),
       ...options,
     }),
