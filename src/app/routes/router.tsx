@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
+import { AppLayout } from '@/app/layouts/app-layout';
+import { AuthLayout } from '@/app/layouts/auth-layout';
+import { RootLayout } from '@/app/layouts/root-layout';
 import { ProtectedRoute } from '@/features/auth/ui/protected-route';
 import { PublicRoute } from '@/features/auth/ui/public-route';
 import { DashboardPage } from '@/pages/dashboard';
-import { RootLayout } from '@/app/layouts/root-layout';
 import { LoginPage } from '@/pages/login';
 
 export const router = createBrowserRouter([
@@ -15,8 +17,13 @@ export const router = createBrowserRouter([
         element: <PublicRoute />,
         children: [
           {
-            index: true,
-            element: <LoginPage />,
+            element: <AuthLayout />,
+            children: [
+              {
+                index: true,
+                element: <LoginPage />,
+              },
+            ],
           },
         ],
       },
@@ -24,8 +31,13 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            path: 'dashboard',
-            element: <DashboardPage />,
+            element: <AppLayout />,
+            children: [
+              {
+                path: 'dashboard',
+                element: <DashboardPage />,
+              },
+            ],
           },
         ],
       },
