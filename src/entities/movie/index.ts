@@ -6,6 +6,7 @@ export type {
   TmdbPaginatedResponse,
   TimeWindow,
 } from './model/movie.types';
+export type { MovieFilters } from './model/movie-filters';
 
 // Query keys
 export { movieQueryKeys } from './model/movie.query-keys';
@@ -13,6 +14,8 @@ export { useMyListStore } from './model/my-list.store';
 
 // API functions
 export {
+  getDiscoveredMovies,
+  getMovieGenres,
   getPopularMovies,
   getTrendingMovies,
   getTopRatedMovies,
@@ -23,6 +26,8 @@ export {
 
 // Hooks
 export { usePopularMovies } from './hooks/use-popular-movies';
+export { useDiscoverMovies } from './hooks/use-discover-movies';
+export { useMovieGenres } from './hooks/use-discover-movies';
 export { useTrendingMovies } from './hooks/use-trending-movies';
 export { useTopRatedMovies } from './hooks/use-top-rated-movies';
 export { useUpcomingMovies } from './hooks/use-upcoming-movies';
