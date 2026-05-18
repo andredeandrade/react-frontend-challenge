@@ -18,7 +18,7 @@ export type AppStore = AppStoreState & AppStoreActions;
 export const useAppStore = createPersistedStore<AppStore, AppStoreState>(
   (set) => ({
     theme: 'system',
-    sidebarOpen: true,
+    sidebarOpen: false,
     setTheme: (theme) => set({ theme }),
     setSidebarOpen: (isOpen) => set({ sidebarOpen: isOpen }),
     toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
@@ -27,7 +27,7 @@ export const useAppStore = createPersistedStore<AppStore, AppStoreState>(
     name: 'cinedash-app-store',
     partialize: (state) => ({
       theme: state.theme,
-      sidebarOpen: state.sidebarOpen,
+      sidebarOpen: false,
     }),
   },
 );
