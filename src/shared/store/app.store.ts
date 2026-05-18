@@ -1,6 +1,6 @@
 import { createPersistedStore } from './base/create-persisted-store';
 
-type ThemeMode = 'light' | 'dark' | 'system';
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 interface AppStoreState {
   theme: ThemeMode;
