@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import {
   MovieCard,
+  useInfiniteDiscoverMovies,
+  useInfiniteMovieSearch,
   useMovieGenres,
-  useDiscoverMovies,
-  useMovieSearch,
   type MovieFilters,
   type Movie,
 } from '@/entities/movie';
-import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { SearchInput } from '@/shared/ui/search-input';
 import { Skeleton } from '@/shared/ui/skeleton';
@@ -37,8 +36,7 @@ export function DiscoveryPage() {
   const [minRating, setMinRating] = useState(
     () => searchParams.get('rating') ?? '',
   );
-  const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const filters = useMemo<MovieFilters>(
     () => ({
@@ -49,8 +47,8 @@ export function DiscoveryPage() {
     [selectedGenreId, year, minRating],
   );
 
-  const discoverQuery = useDiscoverMovies(page, filters);
-  const searchQuery = useMovieSearch(debouncedSearch, page, filters);
+  const discoverQuery = useInfiniteDiscoverMovies(filters);
+  const searchQuery = useInfiniteMovieSearch(debouncedSearch, filters);
   const genresQuery = useMovieGenres();
 
   useEffect(() => {
@@ -62,11 +60,6 @@ export function DiscoveryPage() {
       window.clearTimeout(timeoutId);
     };
   }, [search]);
-
-  useEffect(() => {
-    setPage(1);
-    setMovies([]);
-  }, [debouncedSearch, selectedGenreId, year, minRating]);
 
   useEffect(() => {
     const nextSearchParams = new URLSearchParams();
@@ -91,24 +84,31 @@ export function DiscoveryPage() {
   }, [debouncedSearch, selectedGenreId, year, minRating, setSearchParams]);
 
   const activeQuery = debouncedSearch ? searchQuery : discoverQuery;
-  const { data, isLoading, isFetching, isError, error } = activeQuery;
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    isError,
+    error,
+    hasNextPage,
+    fetchNextPage,
+  } = activeQuery;
 
-  useEffect(() => {
-    if (!data?.results) return;
+  const movies = useMemo<Movie[]>(() => {
+    const pages = data?.pages ?? [];
+    const seenMovieIds = new Set<number>();
 
-    setMovies((previous) => {
-      const existingIds = new Set(previous.map((movie) => movie.id));
-      const newMovies = data.results.filter(
-        (movie) => !existingIds.has(movie.id),
-      );
-      return [...previous, ...newMovies];
-    });
+    return pages.flatMap((page) =>
+      page.results.filter((movie) => {
+        if (seenMovieIds.has(movie.id)) {
+          return false;
+        }
+
+        seenMovieIds.add(movie.id);
+        return true;
+      }),
+    );
   }, [data]);
-
-  const hasMore = useMemo(() => {
-    if (!data) return false;
-    return page < data.total_pages;
-  }, [data, page]);
 
   const filteredMovies = useMemo(() => {
     const genreIdValue = parseParamNumber(selectedGenreId);
@@ -136,11 +136,37 @@ export function DiscoveryPage() {
   }, [movies, selectedGenreId, year, minRating]);
 
   const showInitialLoading = isLoading && movies.length === 0;
+  const showNextPageLoading = isFetchingNextPage && movies.length > 0;
   const showEmptyState =
     !showInitialLoading && !isError && filteredMovies.length === 0;
 
   const filterInputClassName =
     'h-9 w-full rounded-md border border-input bg-transparent px-2.5 text-sm text-foreground shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30';
+
+  useEffect(() => {
+    const element = loadMoreRef.current;
+
+    if (!element || !hasNextPage) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting && !isFetchingNextPage) {
+          void fetchNextPage();
+        }
+      },
+      {
+        rootMargin: '240px 0px',
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
     <section className="w-full space-y-6">
@@ -235,24 +261,20 @@ export function DiscoveryPage() {
               ))}
             </div>
 
-            <div className="flex justify-center">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setPage((previous) => previous + 1)}
-                disabled={!hasMore || isFetching}
-              >
-                {isFetching
-                  ? 'Carregando...'
-                  : hasMore
-                    ? 'Carregar mais'
-                    : 'Sem mais resultados'}
-              </Button>
+            <div
+              ref={loadMoreRef}
+              className="flex min-h-10 items-center justify-center"
+            >
+              {!hasNextPage && !isFetchingNextPage ? (
+                <p className="text-sm text-muted-foreground">
+                  Sem mais resultados.
+                </p>
+              ) : null}
             </div>
           </div>
         ) : null}
 
-        {isFetching && movies.length > 0 ? (
+        {showNextPageLoading ? (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
             {Array.from({ length: 5 }).map((_, index) => (
               <Skeleton key={index} className="aspect-[2/3] w-full" />

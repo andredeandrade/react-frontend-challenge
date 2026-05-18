@@ -11,7 +11,9 @@ function serializeFilters(filters?: MovieFilters) {
 
 export const movieQueryKeys = {
   all: ['movies'] as const,
-  discover: (page = 1, filters?: MovieFilters) =>
+  discover: (filters?: MovieFilters) =>
+    [...movieQueryKeys.all, 'discover', serializeFilters(filters)] as const,
+  discoverPage: (page = 1, filters?: MovieFilters) =>
     [
       ...movieQueryKeys.all,
       'discover',
@@ -24,7 +26,13 @@ export const movieQueryKeys = {
     [...movieQueryKeys.all, 'top-rated', { page }] as const,
   upcoming: (page = 1) =>
     [...movieQueryKeys.all, 'upcoming', { page }] as const,
-  search: (query: string, page = 1, filters?: MovieFilters) =>
+  search: (query: string, filters?: MovieFilters) =>
+    [
+      ...movieQueryKeys.all,
+      'search',
+      { query, ...serializeFilters(filters) },
+    ] as const,
+  searchPage: (query: string, page = 1, filters?: MovieFilters) =>
     [
       ...movieQueryKeys.all,
       'search',
