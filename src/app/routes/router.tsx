@@ -5,8 +5,9 @@ import { AuthLayout } from '@/app/layouts/auth-layout';
 import { RootLayout } from '@/app/layouts/root-layout';
 import { ProtectedRoute } from '@/features/auth/ui/protected-route';
 import { PublicRoute } from '@/features/auth/ui/public-route';
-import { DashboardPage } from '@/pages/dashboard';
+import { DiscoveryPage } from '@/pages/discovery';
 import { LoginPage } from '@/pages/login';
+import { MovieDetailsPage } from '@/pages/movie-details';
 
 export const router = createBrowserRouter([
   {
@@ -34,8 +35,12 @@ export const router = createBrowserRouter([
             element: <AppLayout />,
             children: [
               {
-                path: 'dashboard',
-                element: <DashboardPage />,
+                path: 'descobrir',
+                element: <DiscoveryPage />,
+              },
+              {
+                path: 'filmes/:movieId',
+                element: <MovieDetailsPage />,
               },
             ],
           },

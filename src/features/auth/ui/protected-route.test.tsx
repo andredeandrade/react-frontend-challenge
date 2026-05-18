@@ -17,7 +17,7 @@ function renderWithRoutes(initialPath: string) {
       <Routes>
         <Route path="/" element={<div>Login Page</div>} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<div>Dashboard Content</div>} />
+          <Route path="/descobrir" element={<div>Discovery Content</div>} />
         </Route>
       </Routes>
     </MemoryRouter>,
@@ -36,10 +36,10 @@ describe('ProtectedRoute', () => {
   });
 
   it('redirects unauthenticated users to /', () => {
-    renderWithRoutes('/dashboard');
+    renderWithRoutes('/descobrir');
 
     expect(screen.getByText('Login Page')).toBeInTheDocument();
-    expect(screen.queryByText('Dashboard Content')).not.toBeInTheDocument();
+    expect(screen.queryByText('Discovery Content')).not.toBeInTheDocument();
   });
 
   it('renders protected content for authenticated users', () => {
@@ -50,9 +50,9 @@ describe('ProtectedRoute', () => {
       error: null,
     });
 
-    renderWithRoutes('/dashboard');
+    renderWithRoutes('/descobrir');
 
-    expect(screen.getByText('Dashboard Content')).toBeInTheDocument();
+    expect(screen.getByText('Discovery Content')).toBeInTheDocument();
     expect(screen.queryByText('Login Page')).not.toBeInTheDocument();
   });
 
@@ -60,26 +60,28 @@ describe('ProtectedRoute', () => {
     let capturedLocation: unknown;
 
     render(
-      <MemoryRouter initialEntries={['/dashboard']}>
+      <MemoryRouter initialEntries={['/descobrir']}>
         <Routes>
           <Route
             path="/"
             element={
               <div>
                 Login Page
-                <CaptureLocation onCapture={(loc) => (capturedLocation = loc)} />
+                <CaptureLocation
+                  onCapture={(loc) => (capturedLocation = loc)}
+                />
               </div>
             }
           />
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<div>Dashboard</div>} />
+            <Route path="/descobrir" element={<div>Discovery</div>} />
           </Route>
         </Routes>
       </MemoryRouter>,
     );
 
     expect(capturedLocation).toMatchObject({
-      from: expect.objectContaining({ pathname: '/dashboard' }),
+      from: expect.objectContaining({ pathname: '/descobrir' }),
     });
   });
 });
@@ -89,7 +91,8 @@ function CaptureLocation({
 }: {
   onCapture: (state: unknown) => void;
 }) {
-  const { useLocation } = require('react-router-dom') as typeof import('react-router-dom');
+  const { useLocation } =
+    require('react-router-dom') as typeof import('react-router-dom');
   const location = useLocation();
 
   onCapture(location.state);

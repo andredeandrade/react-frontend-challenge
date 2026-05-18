@@ -4,9 +4,9 @@ import { getTrendingMovies } from '../api/movie.api';
 import { movieQueryKeys } from '../model/movie.query-keys';
 import type { TimeWindow } from '../model/movie.types';
 
-export function useTrendingMovies(timeWindow: TimeWindow = 'week') {
+export function useTrendingMovies(timeWindow: TimeWindow = 'week', page = 1) {
   return useQuery({
-    queryKey: movieQueryKeys.trending(timeWindow),
-    queryFn: () => getTrendingMovies(timeWindow),
+    queryKey: movieQueryKeys.trending(timeWindow, page),
+    queryFn: () => getTrendingMovies(timeWindow, page),
   });
 }
