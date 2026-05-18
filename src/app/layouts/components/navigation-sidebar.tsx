@@ -57,7 +57,7 @@ export function NavigationSidebar() {
           </div>
           <div className="min-w-0">
             <Link
-              to="/dashboard"
+              to="/descobrir"
               onClick={handleNavigate}
               className="block truncate text-lg font-extrabold tracking-tight transition-colors hover:text-primary"
             >
@@ -87,7 +87,7 @@ export function NavigationSidebar() {
                   )}
                 >
                   <Link
-                    to={{ pathname: '/dashboard', hash: item.hash }}
+                    to={{ pathname: '/descobrir', hash: item.hash }}
                     onClick={handleNavigate}
                   >
                     <Icon className="size-4" />

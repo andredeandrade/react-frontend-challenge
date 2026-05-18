@@ -9,6 +9,7 @@ export type {
 
 // Query keys
 export { movieQueryKeys } from './model/movie.query-keys';
+export { useMyListStore } from './model/my-list.store';
 
 // API functions
 export {
@@ -27,3 +28,6 @@ export { useTopRatedMovies } from './hooks/use-top-rated-movies';
 export { useUpcomingMovies } from './hooks/use-upcoming-movies';
 export { useMovieDetails } from './hooks/use-movie-details';
 export { useMovieSearch } from './hooks/use-movie-search';
+
+// UI
+export { MovieCard } from './ui/movie-card';

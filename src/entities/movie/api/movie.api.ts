@@ -20,9 +20,11 @@ export async function getPopularMovies(
 
 export async function getTrendingMovies(
   timeWindow: TimeWindow = 'week',
+  page = 1,
 ): Promise<TmdbPaginatedResponse<Movie>> {
   return tmdbClient.get(`/trending/movie/${timeWindow}`, {
     language: LANGUAGE,
+    page: String(page),
   });
 }
 

@@ -14,7 +14,7 @@ export function AppLayout() {
         <ApplicationHeader />
 
         <main className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
-          <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="w-full px-3 py-6 sm:px-4 lg:px-5">
             <div className="grid min-h-full gap-6">
               <Outlet />
             </div>

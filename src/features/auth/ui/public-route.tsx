@@ -39,7 +39,7 @@ export function PublicRoute() {
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/descobrir" replace />;
   }
 
   return <Outlet />;
