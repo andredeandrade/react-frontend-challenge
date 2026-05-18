@@ -10,7 +10,7 @@ export function useMovieSearch(
   filters?: MovieFilters,
 ) {
   return useQuery({
-    queryKey: movieQueryKeys.search(query, page, filters),
+    queryKey: movieQueryKeys.searchPage(query, page, filters),
     queryFn: () => searchMovies(query, page, filters),
     enabled: query.trim().length > 0,
   });

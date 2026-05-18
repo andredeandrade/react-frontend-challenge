@@ -6,7 +6,7 @@ import { movieQueryKeys } from '../model/movie.query-keys';
 
 export function useDiscoverMovies(page = 1, filters?: MovieFilters) {
   return useQuery({
-    queryKey: movieQueryKeys.discover(page, filters),
+    queryKey: movieQueryKeys.discoverPage(page, filters),
     queryFn: () => getDiscoveredMovies(page, filters),
   });
 }
