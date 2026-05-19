@@ -1,0 +1,1 @@
+export { TrendingMovieCardsList } from './ui/trending-movie-cards-list';
