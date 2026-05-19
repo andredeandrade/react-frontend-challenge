@@ -17,19 +17,20 @@ export function MovieDetailsHeader({
   const navigate = useNavigate();
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-3">
-      <div className="flex min-w-0 items-center gap-2">
+    <header className="flex flex-col gap-2 overflow-hidden sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+      <div className="flex min-w-0 w-full items-center gap-2 sm:flex-1">
         <Button
           type="button"
           variant="ghost"
           size="icon"
+          className="shrink-0"
           aria-label="Voltar para pagina anterior"
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon className="size-5" />
         </Button>
 
-        <h1 className="truncate text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="min-w-0 flex-1 line-clamp-2 text-xl font-semibold tracking-tight sm:line-clamp-1 sm:text-2xl md:text-3xl">
           {title}
         </h1>
       </div>
@@ -38,7 +39,7 @@ export function MovieDetailsHeader({
         type="button"
         variant={isInWatchlist ? 'secondary' : 'outline'}
         size="sm"
-        className="w-fit"
+        className="w-fit shrink-0"
         onClick={onToggleWatchlist}
       >
         {isInWatchlist ? (
