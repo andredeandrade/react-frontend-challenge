@@ -10,7 +10,6 @@ export type { MovieFilters } from './model/movie-filters';
 
 // Query keys
 export { movieQueryKeys } from './model/movie.query-keys';
-export { useMyListStore } from './model/my-list.store';
 
 // API functions
 export {
