@@ -37,6 +37,7 @@ export { useInfiniteDiscoverMovies } from './hooks/use-infinite-discover-movies'
 export { useInfiniteMovieSearch } from './hooks/use-infinite-movie-search';
 export { useInfinitePopularMovies } from './hooks/use-infinite-popular-movies';
 export { useInfiniteTopRatedMovies } from './hooks/use-infinite-top-rated-movies';
+export { useInfiniteUpcomingMovies } from './hooks/use-infinite-upcoming-movies';
 export { useInfiniteTrendingMovies } from './hooks/use-infinite-trending-movies';
 export { useTrendingMovies } from './hooks/use-trending-movies';
 export { useTopRatedMovies } from './hooks/use-top-rated-movies';

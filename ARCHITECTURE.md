@@ -19,7 +19,7 @@ CineDash is a React + TypeScript application for movie discovery and curation po
 The project follows a Feature-Sliced Design inspired structure:
 
 - `src/app`: app composition, top-level layouts, routing, providers
-- `src/pages`: route-level pages (Discovery, Trending, Popular, Watchlist, Movie Details, Login)
+- `src/pages`: route-level pages (Discovery, Trending, Popular, Top Rated, Upcoming, Watchlist, Movie Details, Login)
 - `src/widgets`: page-level compositions (lists and section-level UI)
 - `src/features`: business features (currently auth)
 - `src/entities`: domain entities and their API/hooks/model/ui (movie)
@@ -33,7 +33,8 @@ We use FSD principles to keep responsibilities explicit:
 
 - `entities/movie` owns movie domain contracts, API access, state hooks, and entity-level UI (`MovieCard`).
 - `features/auth` owns login/session business rules and route guards.
-- `widgets/*-list` compose entity components and loading/error/empty states for page sections.
+- `widgets/*-list` compose entity components and loading/error/empty states for page sections (Discovery, Trending, Popular, Top Rated, Upcoming).
+- `widgets/movie-details` owns section-level composition for details (header actions, cast/trailer sections, loading/error states).
 - `pages/*` focus on route-level orchestration and page semantics.
 - `app/*` is the composition root (router, layouts, providers).
 
@@ -113,6 +114,8 @@ Router is declared in `app/routes/router.tsx` with nested layouts and guards:
   - `/descobrir`
   - `/em-alta`
   - `/populares`
+  - `/mais-bem-avaliados`
+  - `/em-breve`
   - `/filmes/:movieId`
   - `/minha-lista`
 - Wildcard -> redirect to `/`
@@ -134,7 +137,7 @@ Examples:
 
 ### 9.2 Reusable list building blocks
 - `shared/ui/list/*`: common page title/description and filter container pieces
-- Discovery/Trending/Popular widgets reuse card-grid and loading/error/empty patterns
+- Discovery/Trending/Popular/Top Rated/Upcoming widgets reuse card-grid and loading/error/empty patterns
 
 ### 9.3 Composition over monoliths
 Pages compose:
@@ -161,7 +164,7 @@ Rules:
 Key choices to keep UI responsive and network efficient:
 
 - TanStack Query caching and stale-time tuning to reduce redundant requests.
-- Infinite scrolling for large lists (Discovery, Popular, Trending) using `useInfiniteQuery`.
+- Infinite scrolling for large lists (Discovery, Popular, Trending, Top Rated, Upcoming) using `useInfiniteQuery`.
 - Movie deduplication across paginated pages via `Set` by movie id.
 - `useMemo` for derived collections (mapped rows, filtered lists, genre labels).
 - Skeleton placeholders for perceived performance.
@@ -171,7 +174,7 @@ Key choices to keep UI responsive and network efficient:
 ## 12. Current Tradeoffs and Next Evolution
 Tradeoffs:
 - Auth is mocked and local-only.
-- Some pages still include in-file table primitives that can be extracted to shared UI.
+- Watchlist table primitives are still widget-local and can be promoted to shared UI if reused by additional table screens.
 
 Potential next steps:
 - Add centralized error boundary/reporting strategy.
@@ -180,4 +183,4 @@ Potential next steps:
 - Introduce code-splitting by route for faster initial load.
 
 ## 13. Delivery Workflow Note
-Project planning and execution were managed through GitHub Projects tasks (board-based tracking), with features delivered incrementally (Discovery refactor, Watchlist, Details enhancements, Trending/Popular pages, pagination, and navigation updates).
+Project planning and execution were managed through GitHub Projects tasks (board-based tracking), with features delivered incrementally (Discovery refactor, Watchlist, Details modularization, Trending/Popular/Top Rated/Upcoming pages, pagination, and navigation updates).

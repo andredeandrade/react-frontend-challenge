@@ -11,6 +11,7 @@ import { MovieDetailsPage } from '@/pages/movie-details';
 import { PopularPage } from '@/pages/popular';
 import { TopRatedPage } from '@/pages/top-rated';
 import { TrendingPage } from '@/pages/trending';
+import { UpcomingPage } from '@/pages/upcoming';
 import { WatchlistPage } from '@/pages/watchlist';
 
 export const router = createBrowserRouter([
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
               {
                 path: 'mais-bem-avaliados',
                 element: <TopRatedPage />,
+              },
+              {
+                path: 'em-breve',
+                element: <UpcomingPage />,
               },
               {
                 path: 'filmes/:movieId',
