@@ -38,3 +38,6 @@ export { useMovieSearch } from './hooks/use-movie-search';
 
 // UI
 export { MovieCard } from './ui/movie-card';
+export { FilterGenre } from './ui/filter-genre';
+export { FilterYear } from './ui/filter-year';
+export { FilterScore } from './ui/filter-score';
