@@ -1,0 +1,1 @@
+export { WatchlistMoviesTable } from './ui/watchlist-movies-table';
