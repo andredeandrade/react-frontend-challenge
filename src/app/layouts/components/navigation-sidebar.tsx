@@ -33,6 +33,11 @@ const navigationItems: NavigationItem[] = [
     icon: SparklesIcon,
   },
   {
+    label: 'Populares',
+    to: { pathname: '/populares' },
+    icon: ClapperboardIcon,
+  },
+  {
     label: 'Mais Bem Avaliados',
     to: { pathname: '/descobrir', hash: '#mais-bem-avaliados' },
     icon: StarIcon,
