@@ -10,32 +10,42 @@ import {
   SparklesIcon,
   StarIcon,
 } from 'lucide-react';
+import type { ComponentType } from 'react';
 
-const navigationItems = [
+type NavigationItem = {
+  label: string;
+  to: {
+    pathname: string;
+    hash?: string;
+  };
+  icon: ComponentType<{ className?: string }>;
+};
+
+const navigationItems: NavigationItem[] = [
   {
     label: 'Descobrir',
-    hash: '',
+    to: { pathname: '/descobrir' },
     icon: CompassIcon,
   },
   {
-    label: 'Minha Lista',
-    hash: '#minha-lista',
-    icon: BookmarkIcon,
-  },
-  {
     label: 'Em Alta',
-    hash: '#em-alta',
+    to: { pathname: '/descobrir', hash: '#em-alta' },
     icon: SparklesIcon,
   },
   {
     label: 'Mais Bem Avaliados',
-    hash: '#mais-bem-avaliados',
+    to: { pathname: '/descobrir', hash: '#mais-bem-avaliados' },
     icon: StarIcon,
   },
   {
     label: 'Em Breve',
-    hash: '#em-breve',
+    to: { pathname: '/descobrir', hash: '#em-breve' },
     icon: CompassIcon,
+  },
+  {
+    label: 'Minha Lista',
+    to: { pathname: '/minha-lista' },
+    icon: BookmarkIcon,
   },
 ];
 
@@ -43,6 +53,7 @@ export function NavigationSidebar() {
   const location = useLocation();
   const setSidebarOpen = useAppStore((state) => state.setSidebarOpen);
   const currentHash = location.hash;
+  const currentPathname = location.pathname;
 
   const handleNavigate = () => {
     setSidebarOpen(false);
@@ -71,9 +82,10 @@ export function NavigationSidebar() {
         <ul className="space-y-1.5">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = item.hash
-              ? currentHash === item.hash
-              : currentHash.length === 0;
+            const isActive =
+              currentPathname === item.to.pathname &&
+              ((item.to.hash && currentHash === item.to.hash) ||
+                (!item.to.hash && currentHash.length === 0));
 
             return (
               <li key={item.label}>
@@ -87,7 +99,7 @@ export function NavigationSidebar() {
                   )}
                 >
                   <Link
-                    to={{ pathname: '/descobrir', hash: item.hash }}
+                    to={item.to}
                     onClick={handleNavigate}
                   >
                     <Icon className="size-4" />

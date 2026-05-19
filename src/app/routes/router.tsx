@@ -8,6 +8,7 @@ import { PublicRoute } from '@/features/auth/ui/public-route';
 import { DiscoveryPage } from '@/pages/discovery';
 import { LoginPage } from '@/pages/login';
 import { MovieDetailsPage } from '@/pages/movie-details';
+import { WatchlistPage } from '@/pages/watchlist';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
               {
                 path: 'filmes/:movieId',
                 element: <MovieDetailsPage />,
+              },
+              {
+                path: 'minha-lista',
+                element: <WatchlistPage />,
               },
             ],
           },

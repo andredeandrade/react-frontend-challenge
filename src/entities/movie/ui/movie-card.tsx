@@ -1,5 +1,5 @@
 import type { Movie } from '../model/movie.types';
-import { useMyListStore } from '../model/my-list.store';
+import { useWatchlistStore } from '../model/watchlist.store';
 
 import { buildImageUrl } from '@/shared/lib/tmdb';
 import { Button } from '@/shared/ui/button';
@@ -12,6 +12,7 @@ import {
 } from '@/shared/ui/card';
 import { CheckIcon, PlusIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface MovieCardProps {
   movie: Movie;
@@ -19,10 +20,9 @@ interface MovieCardProps {
 
 export function MovieCard({ movie }: MovieCardProps) {
   const posterUrl = buildImageUrl(movie.poster_path, 'w342');
-  const isInMyList = useMyListStore((state) =>
-    state.movieIds.includes(movie.id),
-  );
-  const toggleMovie = useMyListStore((state) => state.toggleMovie);
+  const isInWatchlist = useWatchlistStore((state) => state.isInWatchlist(movie.id));
+  const addToWatchlist = useWatchlistStore((state) => state.addToWatchlist);
+  const removeFromWatchlist = useWatchlistStore((state) => state.removeFromWatchlist);
 
   const detailsPath = `/filmes/${movie.id}`;
 
@@ -62,12 +62,21 @@ export function MovieCard({ movie }: MovieCardProps) {
           <div className="flex flex-col gap-2">
             <Button
               type="button"
-              variant={isInMyList ? 'secondary' : 'outline'}
+              variant={isInWatchlist ? 'secondary' : 'outline'}
               size="sm"
               className="cursor-pointer"
-              onClick={() => toggleMovie(movie.id)}
+              onClick={() => {
+                if (isInWatchlist) {
+                  removeFromWatchlist(movie.id);
+                  toast.info(`"${movie.title}" removido da sua lista.`);
+                  return;
+                }
+
+                addToWatchlist(movie);
+                toast.success(`"${movie.title}" adicionado na sua lista.`);
+              }}
             >
-              {isInMyList ? (
+              {isInWatchlist ? (
                 <>
                   <CheckIcon className="size-4" />
                   Na lista
