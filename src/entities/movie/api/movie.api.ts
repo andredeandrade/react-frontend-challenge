@@ -3,7 +3,9 @@ import { tmdbClient } from '@/shared/lib/tmdb';
 import type {
   Genre,
   Movie,
+  MovieCredits,
   MovieDetails,
+  MovieVideos,
   TimeWindow,
   TmdbPaginatedResponse,
 } from '../model/movie.types';
@@ -119,4 +121,12 @@ export async function searchMovies(
 
 export async function getMovieDetails(id: number): Promise<MovieDetails> {
   return tmdbClient.get(`/movie/${id}`, { language: LANGUAGE });
+}
+
+export async function getMovieCredits(id: number): Promise<MovieCredits> {
+  return tmdbClient.get(`/movie/${id}/credits`, { language: LANGUAGE });
+}
+
+export async function getMovieVideos(id: number): Promise<MovieVideos> {
+  return tmdbClient.get(`/movie/${id}/videos`, { language: LANGUAGE });
 }

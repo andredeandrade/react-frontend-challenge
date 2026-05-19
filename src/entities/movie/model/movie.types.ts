@@ -23,6 +23,34 @@ export interface SpokenLanguage {
   name: string;
 }
 
+export interface CastMember {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+  order: number;
+}
+
+export interface MovieCredits {
+  id: number;
+  cast: CastMember[];
+}
+
+export interface MovieVideo {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+  published_at: string;
+}
+
+export interface MovieVideos {
+  id: number;
+  results: MovieVideo[];
+}
+
 export interface Movie {
   id: number;
   title: string;

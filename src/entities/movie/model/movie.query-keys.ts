@@ -39,4 +39,6 @@ export const movieQueryKeys = {
       { query, page, ...serializeFilters(filters) },
     ] as const,
   detail: (id: number) => [...movieQueryKeys.all, 'detail', id] as const,
+  credits: (id: number) => [...movieQueryKeys.all, 'credits', id] as const,
+  videos: (id: number) => [...movieQueryKeys.all, 'videos', id] as const,
 };
