@@ -1,5 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react';
 
+import { cn } from '@/shared/lib/utils';
+
 type PropsWithChildren = {
   children: ReactNode;
 };
@@ -20,17 +22,34 @@ export function WatchlistTableRow({ children }: PropsWithChildren) {
   return <tr className="transition-colors hover:bg-muted/30">{children}</tr>;
 }
 
-export function WatchlistTableHead({ children }: PropsWithChildren) {
+export function WatchlistTableHead({
+  children,
+  className,
+  ...props
+}: ComponentProps<'th'>) {
   return (
-    <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">
+    <th
+      className={cn(
+        'px-3 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase sm:px-6',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </th>
   );
 }
 
-export function WatchlistTableCell({ children, ...props }: ComponentProps<'td'>) {
+export function WatchlistTableCell({
+  children,
+  className,
+  ...props
+}: ComponentProps<'td'>) {
   return (
-    <td className="px-6 py-4 text-sm whitespace-nowrap text-foreground" {...props}>
+    <td
+      className={cn('px-3 py-4 text-sm text-foreground align-top sm:px-6', className)}
+      {...props}
+    >
       {children}
     </td>
   );

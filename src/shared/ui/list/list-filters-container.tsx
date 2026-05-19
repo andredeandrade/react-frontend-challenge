@@ -11,7 +11,7 @@ export function ListFiltersContainer({
   return (
     <div
       className={cn(
-        'flex w-full items-center gap-3 overflow-x-auto pb-1',
+        'grid w-full grid-cols-3 gap-3 lg:flex lg:items-center lg:gap-3 lg:overflow-x-auto lg:pb-1',
         className,
       )}
       {...props}

@@ -1,5 +1,11 @@
 # INSTRUCTIONS
 
+## 0. Quick Test (Online)
+
+You can test the deployed app directly at:
+
+- https://cinedash-smoky.vercel.app/
+
 ## 1. Project Requirements
 
 Minimum requirements to run the project locally:

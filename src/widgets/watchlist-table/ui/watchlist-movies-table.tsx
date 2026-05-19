@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 
 import { buildImageUrl } from '@/shared/lib/tmdb';
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
 import { type WatchlistRow, useWatchlistRows } from '../model/use-watchlist-rows';
@@ -61,6 +62,7 @@ function SortableHeader({
 export function WatchlistMoviesTable() {
   const { rows, isLoadingGenres, removeFromWatchlist } = useWatchlistRows();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const hiddenOnMobileColumnIds = new Set(['genreLabel', 'release_date']);
 
   const columns = useMemo<ColumnDef<WatchlistRow>[]>(
     () => [
@@ -121,6 +123,7 @@ export function WatchlistMoviesTable() {
           <Button
             variant="outline"
             size="sm"
+            className="w-full sm:w-auto"
             onClick={() => {
               removeFromWatchlist(row.original.id);
               toast.info(`"${row.original.title}" removido da sua lista.`);
@@ -152,7 +155,12 @@ export function WatchlistMoviesTable() {
             {table.getHeaderGroups().map((headerGroup) => (
               <WatchlistTableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <WatchlistTableHead key={header.id}>
+                  <WatchlistTableHead
+                    key={header.id}
+                    className={cn(
+                      hiddenOnMobileColumnIds.has(header.column.id) && 'hidden sm:table-cell',
+                    )}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -173,7 +181,12 @@ export function WatchlistMoviesTable() {
               table.getRowModel().rows.map((row) => (
                 <WatchlistTableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <WatchlistTableCell key={cell.id}>
+                    <WatchlistTableCell
+                      key={cell.id}
+                      className={cn(
+                        hiddenOnMobileColumnIds.has(cell.column.id) && 'hidden sm:table-cell',
+                      )}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </WatchlistTableCell>
                   ))}

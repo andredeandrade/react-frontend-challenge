@@ -2,7 +2,7 @@ import { Skeleton } from '@/shared/ui/skeleton';
 
 export function MovieDetailsSkeleton() {
   return (
-    <section className="space-y-4 px-5 py-5">
+    <section className="space-y-4 px-5 pb-5 pt-2 sm:pt-3">
       <Skeleton className="h-8 w-64" />
       <div className="grid gap-5 md:grid-cols-[280px_1fr]">
         <Skeleton className="aspect-[2/3] w-full" />
