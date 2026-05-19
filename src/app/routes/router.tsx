@@ -8,6 +8,7 @@ import { PublicRoute } from '@/features/auth/ui/public-route';
 import { DiscoveryPage } from '@/pages/discovery';
 import { LoginPage } from '@/pages/login';
 import { MovieDetailsPage } from '@/pages/movie-details';
+import { TrendingPage } from '@/pages/trending';
 import { WatchlistPage } from '@/pages/watchlist';
 
 export const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
               {
                 path: 'descobrir',
                 element: <DiscoveryPage />,
+              },
+              {
+                path: 'em-alta',
+                element: <TrendingPage />,
               },
               {
                 path: 'filmes/:movieId',

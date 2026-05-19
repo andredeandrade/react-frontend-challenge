@@ -29,7 +29,7 @@ const navigationItems: NavigationItem[] = [
   },
   {
     label: 'Em Alta',
-    to: { pathname: '/descobrir', hash: '#em-alta' },
+    to: { pathname: '/em-alta' },
     icon: SparklesIcon,
   },
   {
