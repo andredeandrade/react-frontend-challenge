@@ -1,7 +1,11 @@
 // Types
 export type {
+  CastMember,
   Movie,
+  MovieCredits,
   MovieDetails,
+  MovieVideo,
+  MovieVideos,
   Genre,
   TmdbPaginatedResponse,
   TimeWindow,
@@ -19,7 +23,9 @@ export {
   getTrendingMovies,
   getTopRatedMovies,
   getUpcomingMovies,
+  getMovieCredits,
   getMovieDetails,
+  getMovieVideos,
   searchMovies,
 } from './api/movie.api';
 
@@ -32,7 +38,9 @@ export { useInfiniteMovieSearch } from './hooks/use-infinite-movie-search';
 export { useTrendingMovies } from './hooks/use-trending-movies';
 export { useTopRatedMovies } from './hooks/use-top-rated-movies';
 export { useUpcomingMovies } from './hooks/use-upcoming-movies';
+export { useMovieCredits } from './hooks/use-movie-details';
 export { useMovieDetails } from './hooks/use-movie-details';
+export { useMovieVideos } from './hooks/use-movie-details';
 export { useMovieSearch } from './hooks/use-movie-search';
 
 // UI
