@@ -1,0 +1,44 @@
+import type { TimeWindow } from './movie.types';
+import type { MovieFilters } from './movie-filters';
+
+function serializeFilters(filters?: MovieFilters) {
+  return {
+    genreId: filters?.genreId ?? null,
+    year: filters?.year ?? null,
+    minRating: filters?.minRating ?? null,
+  };
+}
+
+export const movieQueryKeys = {
+  all: ['movies'] as const,
+  discover: (filters?: MovieFilters) =>
+    [...movieQueryKeys.all, 'discover', serializeFilters(filters)] as const,
+  discoverPage: (page = 1, filters?: MovieFilters) =>
+    [
+      ...movieQueryKeys.all,
+      'discover',
+      { page, ...serializeFilters(filters) },
+    ] as const,
+  popular: (page = 1) => [...movieQueryKeys.all, 'popular', { page }] as const,
+  trending: (timeWindow: TimeWindow = 'week', page = 1) =>
+    [...movieQueryKeys.all, 'trending', timeWindow, { page }] as const,
+  topRated: (page = 1) =>
+    [...movieQueryKeys.all, 'top-rated', { page }] as const,
+  upcoming: (page = 1) =>
+    [...movieQueryKeys.all, 'upcoming', { page }] as const,
+  search: (query: string, filters?: MovieFilters) =>
+    [
+      ...movieQueryKeys.all,
+      'search',
+      { query, ...serializeFilters(filters) },
+    ] as const,
+  searchPage: (query: string, page = 1, filters?: MovieFilters) =>
+    [
+      ...movieQueryKeys.all,
+      'search',
+      { query, page, ...serializeFilters(filters) },
+    ] as const,
+  detail: (id: number) => [...movieQueryKeys.all, 'detail', id] as const,
+  credits: (id: number) => [...movieQueryKeys.all, 'credits', id] as const,
+  videos: (id: number) => [...movieQueryKeys.all, 'videos', id] as const,
+};
