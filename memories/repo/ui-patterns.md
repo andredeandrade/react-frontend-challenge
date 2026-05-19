@@ -4,4 +4,4 @@
 - `ListFiltersContainer` is size-agnostic; each page sets field sizing via `className` on each filter component.
 - Movie-specific filters with behavior (not only style) live in `src/entities/movie/ui/`: `FilterGenre`, `FilterYear`, and `FilterScore`.
 - Discovery list state is centralized in `ListProvider` (`src/shared/ui/list/model/list-provider.tsx`) to avoid prop drilling.
-- Discovery UI is split into `DiscoveryListingFilters` and `DiscoveryMovieCardsList` under `src/widgets/discovery-listing/ui/`.
+- Discovery UI is split into `DiscoveryListFilters` and `DiscoveryMovieCardsList` under `src/widgets/discovery-list/ui/`.
