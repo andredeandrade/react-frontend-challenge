@@ -1,0 +1,1 @@
+export { TopRatedMovieCardsList } from './ui/top-rated-movie-cards-list';

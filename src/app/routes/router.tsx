@@ -9,6 +9,7 @@ import { DiscoveryPage } from '@/pages/discovery';
 import { LoginPage } from '@/pages/login';
 import { MovieDetailsPage } from '@/pages/movie-details';
 import { PopularPage } from '@/pages/popular';
+import { TopRatedPage } from '@/pages/top-rated';
 import { TrendingPage } from '@/pages/trending';
 import { WatchlistPage } from '@/pages/watchlist';
 
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
               {
                 path: 'populares',
                 element: <PopularPage />,
+              },
+              {
+                path: 'mais-bem-avaliados',
+                element: <TopRatedPage />,
               },
               {
                 path: 'filmes/:movieId',
