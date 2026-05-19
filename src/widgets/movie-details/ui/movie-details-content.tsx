@@ -29,7 +29,7 @@ export function MovieDetailsContent({ movieId }: MovieDetailsContentProps) {
   const movie = detailsQuery.data;
 
   return (
-    <section className="space-y-5 px-5 py-5">
+    <section className="space-y-5 px-5 pb-5 pt-2 sm:pt-3">
       <MovieDetailsHeader
         title={movie.title}
         isInWatchlist={isInWatchlist}

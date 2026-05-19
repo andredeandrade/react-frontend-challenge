@@ -18,7 +18,7 @@ export function DiscoveryListFilters() {
   return (
     <ListFiltersContainer>
       <ListFilterSearchInput
-        className="w-full min-w-72 md:min-w-80 lg:flex-[1.6]"
+        className="col-span-full w-full min-w-0 lg:flex-[1.6]"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         placeholder="Buscar filmes por titulo..."
@@ -28,19 +28,19 @@ export function DiscoveryListFilters() {
       <FilterGenre
         value={selectedGenreId}
         onChange={setSelectedGenreId}
-        className="w-full min-w-40 md:min-w-44 lg:flex-1"
+        className="w-full min-w-0 lg:flex-1"
       />
 
       <FilterYear
         value={year}
         onChange={setYear}
-        className="w-full min-w-32 md:min-w-36 lg:flex-1"
+        className="w-full min-w-0 lg:flex-1"
       />
 
       <FilterScore
         value={minRating}
         onChange={setMinRating}
-        className="w-full min-w-36 md:min-w-40 lg:flex-1"
+        className="w-full min-w-0 lg:flex-1"
       />
     </ListFiltersContainer>
   );
