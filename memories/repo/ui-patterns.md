@@ -1,0 +1,7 @@
+- List page heading primitives live under `src/shared/ui/list/`: `ListPageTitle` and `ListPageDescription`.
+- Discovery page consumes list primitives via `@/shared/ui/list` instead of inline `h1`/`p` styles.
+- Reusable list filter fields are in `src/shared/ui/list/`: `ListFilterSearchInput`, `ListFilterSelect`, and `ListFilterNumberInput`.
+- `ListFiltersContainer` is size-agnostic; each page sets field sizing via `className` on each filter component.
+- Movie-specific filters with behavior (not only style) live in `src/entities/movie/ui/`: `FilterGenre`, `FilterYear`, and `FilterScore`.
+- Discovery list state is centralized in `ListProvider` (`src/shared/ui/list/model/list-provider.tsx`) to avoid prop drilling.
+- Discovery UI is split into `DiscoveryListingFilters` and `DiscoveryMovieCardsList` under `src/widgets/discovery-listing/ui/`.
