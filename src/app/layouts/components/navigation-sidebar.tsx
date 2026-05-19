@@ -39,7 +39,7 @@ const navigationItems: NavigationItem[] = [
   },
   {
     label: 'Mais Bem Avaliados',
-    to: { pathname: '/descobrir', hash: '#mais-bem-avaliados' },
+    to: { pathname: '/mais-bem-avaliados' },
     icon: StarIcon,
   },
   {
