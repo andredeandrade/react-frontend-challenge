@@ -23,7 +23,7 @@ Optional requirements:
 ### 2.1 Clone and enter the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/andredeandrade/react-frontend-challenge
 cd react-frontend-challenge
 ```
 
