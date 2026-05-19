@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/model';
 
@@ -91,8 +91,6 @@ function CaptureLocation({
 }: {
   onCapture: (state: unknown) => void;
 }) {
-  const { useLocation } =
-    require('react-router-dom') as typeof import('react-router-dom');
   const location = useLocation();
 
   onCapture(location.state);
