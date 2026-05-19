@@ -55,10 +55,10 @@ export function MovieDetailsContent({ movieId }: MovieDetailsContentProps) {
 
           <div className="grid gap-2 text-sm sm:grid-cols-2">
             <p>
-              <strong>Lancamento:</strong> {movie.release_date || 'Nao informado'}
+              <strong>Lançamento:</strong> {movie.release_date || 'Nao informado'}
             </p>
             <p>
-              <strong>Duracao:</strong> {movie.runtime ? `${movie.runtime} min` : 'Nao informado'}
+              <strong>Duração:</strong> {movie.runtime ? `${movie.runtime} min` : 'Nao informado'}
             </p>
             <p>
               <strong>Nota:</strong> {movie.vote_average.toFixed(1)}

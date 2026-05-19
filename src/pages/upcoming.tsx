@@ -1,19 +1,19 @@
 import { ListPageDescription, ListPageTitle } from '@/shared/ui/list';
-import { TrendingMovieCardsList } from '@/widgets/trending-list';
+import { UpcomingMovieCardsList } from '@/widgets/upcoming-list';
 
-export function TrendingPage() {
+export function UpcomingPage() {
   return (
     <section className="w-full space-y-6">
       <div className="space-y-4 px-5 py-2">
         <div>
-          <ListPageTitle>Em Alta</ListPageTitle>
+          <ListPageTitle>Em Breve</ListPageTitle>
           <ListPageDescription>
-            Filmes que estão em destaque nesta semana.
+            Filmes com lançamento proximo para voce acompanhar.
           </ListPageDescription>
         </div>
       </div>
 
-      <TrendingMovieCardsList />
+      <UpcomingMovieCardsList />
     </section>
   );
 }

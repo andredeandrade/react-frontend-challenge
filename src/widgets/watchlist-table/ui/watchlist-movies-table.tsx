@@ -104,7 +104,7 @@ export function WatchlistMoviesTable() {
       },
       {
         accessorKey: 'release_date',
-        header: 'Data de Lancamento',
+        header: 'Data de Lançamento',
         cell: ({ row }) => row.original.release_date || '-',
         enableSorting: false,
       },

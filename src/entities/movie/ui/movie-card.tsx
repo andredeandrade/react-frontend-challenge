@@ -49,7 +49,7 @@ export function MovieCard({ movie }: MovieCardProps) {
           {movie.title}
         </CardTitle>
         <CardDescription>
-          Lancamento: {movie.release_date || 'Nao informado'}
+          Lançamento: {movie.release_date || 'Nao informado'}
         </CardDescription>
       </CardHeader>
 

@@ -8,7 +8,7 @@ export function TopRatedPage() {
         <div>
           <ListPageTitle>Mais Bem Avaliados</ListPageTitle>
           <ListPageDescription>
-            Filmes com as melhores avaliacoes para voce descobrir.
+            Filmes com as melhores avaliações para voce descobrir.
           </ListPageDescription>
         </div>
       </div>

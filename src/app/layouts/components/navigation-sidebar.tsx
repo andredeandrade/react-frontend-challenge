@@ -44,7 +44,7 @@ const navigationItems: NavigationItem[] = [
   },
   {
     label: 'Em Breve',
-    to: { pathname: '/descobrir', hash: '#em-breve' },
+    to: { pathname: '/em-breve' },
     icon: CompassIcon,
   },
   {
