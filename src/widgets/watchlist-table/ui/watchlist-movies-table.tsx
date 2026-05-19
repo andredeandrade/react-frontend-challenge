@@ -76,18 +76,18 @@ export function WatchlistMoviesTable() {
           return (
             <Link
               to={`/filmes/${movie.id}`}
-              className="group flex items-center gap-3"
+              className="group flex min-w-0 items-center gap-3"
               aria-label={`Ver detalhes do filme ${movie.title}`}
             >
               {posterUrl ? (
                 <img
                   src={posterUrl}
                   alt={`Poster do filme ${movie.title}`}
-                  className="h-14 w-10 rounded-sm object-cover"
+                  className="h-12 w-9 shrink-0 rounded-sm object-cover sm:h-14 sm:w-10"
                   loading="lazy"
                 />
               ) : (
-                <div className="h-14 w-10 rounded-sm bg-muted" aria-hidden />
+                <div className="h-12 w-9 shrink-0 rounded-sm bg-muted sm:h-14 sm:w-10" aria-hidden />
               )}
 
               <span className="line-clamp-2 font-medium text-foreground group-hover:underline">
